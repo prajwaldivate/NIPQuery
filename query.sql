@@ -39,62 +39,62 @@ SELECT
 
     -- Rule to determine "Green" status based on process_id, status_name, and TAT rules
     CASE 
-        WHEN process_id IN (16677, 16889, 4871, 12628, 12631, 12818, 4291, 12815, 16686, 16689, 1848, 5164, 5165, 12273, 16961, 16936, 16691) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, received_date, end_time) <= 1 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, received_date, NOW()) <= 1 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (16981, 13657, 12682, 1889, 4688, 1958, 5315, 5166, 12412, 1396, 4002, 12988, 1960, 3391, 12812) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, received_date, end_time) <= 2 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, received_date, NOW()) <= 2 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (12636, 16679, 16681, 4690, 16743) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, received_date, end_time) <= 7 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, received_date, NOW()) <= 7 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (1868, 1871) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, received_date, end_time) <= 5 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, received_date, NOW()) <= 5 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (2018, 2016, 1063, 2006, 2004, 988) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, end_time, effective_date) > 45 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, NOW(), effective_date) > 45 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id = 13217 THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, end_time, effective_date) >= 21 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, NOW(), effective_date) >= 21 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (12257, 12318) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, end_time, effective_date) <= 30 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, NOW(), effective_date) <= 30 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (5167, 1179, 16959, 16963) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, end_time, effective_date) <= 10 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, NOW(), effective_date) <= 10 THEN 'Green'
-                ELSE 'Red'
-            END
-        WHEN process_id IN (13214, 16685) THEN
-            CASE
-                WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(DAY, received_date, end_time) <= 14 THEN 'Green'
-                WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(DAY, received_date, NOW()) <= 14 THEN 'Green'
-                ELSE 'Red'
-            END
-        ELSE 'Ignore'
-    END AS rule_status
+    WHEN process_id IN (16677, 16889, 4871, 12628, 12631, 12818, 4291, 12815, 16686, 16689, 1848, 5164, 5165, 12273, 16961, 16936, 16691) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, received_date, end_time) <= 24 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, received_date, NOW()) <= 24 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (16981, 13657, 12682, 1889, 4688, 1958, 5315, 5166, 12412, 1396, 4002, 12988, 1960, 3391, 12812) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, received_date, end_time) <= 48 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, received_date, NOW()) <= 48 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (12636, 16679, 16681, 4690, 16743) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, received_date, end_time) <= 168 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, received_date, NOW()) <= 168 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (1868, 1871) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, received_date, end_time) <= 120 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, received_date, NOW()) <= 120 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (2018, 2016, 1063, 2006, 2004, 988) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, end_time, effective_date) > 1080 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, NOW(), effective_date) > 1080 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id = 13217 THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, end_time, effective_date) >= 504 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, NOW(), effective_date) >= 504 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (12257, 12318) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, end_time, effective_date) <= 720 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, NOW(), effective_date) <= 720 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (5167, 1179, 16959, 16963) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, end_time, effective_date) <= 240 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, NOW(), effective_date) <= 240 THEN 'Green'
+            ELSE 'Red'
+        END
+    WHEN process_id IN (13214, 16685) THEN
+        CASE
+            WHEN CONVERT(status_name USING utf8mb4) = 'Completed' AND TIMESTAMPDIFF(HOUR, received_date, end_time) <= 336 THEN 'Green'
+            WHEN CONVERT(status_name USING utf8mb4) IN ('Not Completed', 'Additional information needed – Pending') AND TIMESTAMPDIFF(HOUR, received_date, NOW()) <= 336 THEN 'Green'
+            ELSE 'Red'
+        END
+    ELSE 'Ignore'
+END AS rule_status
 
 
 FROM
