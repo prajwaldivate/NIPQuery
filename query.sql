@@ -96,30 +96,47 @@ SELECT
         ELSE 'Ignore'
     END AS rule_status
 
+
 FROM
     restorefinal.club_task_enriched_last_2_years
 WHERE
-    client_id = 89 
-    AND project_id = 179
-    AND received_date <> '0000-00-00 00:00:00'
-    AND end_time <> '0000-00-00 00:00:00'
-    AND TIMESTAMPDIFF(HOUR, received_date, end_time) >= 0
-    AND received_date BETWEEN '{{ $json.body.recieved_date_from }}' AND '{{ $json.body.recieved_date_to }} 23:59:59'
-    AND status_name IN ('Completed','Not Completed', 'Additional information needed – Pending')
-  AND process_id NOT IN (
-    2014,  -- Growpro New Business Rating Large
-    2012,  -- Growpro New Business Rating Medium
-    1062,  -- Growpro New Business Rating Small
-    2002,  -- Program New Business Rating Large
-    866,   -- Program New Business Rating Medium
-    2000,  -- Program New Business Rating Small
-    2601,  -- WC New Business Rating
-    16676, -- Stewardship Reports
-    17240, -- AmTrust New Business Rating_Large
-    17238, -- AmTrust New Business Rating_Medium
-    17236, -- AmTrust New Business Rating_Small
-    17201,  -- Billing contact update
-    868,   -- Other Activity
-    3625   -- OTT-Miscellaneous
+    client_id = 89
+AND project_id = 179
+AND received_date <> '0000-00-00 00:00:00'
+AND end_time <> '0000-00-00 00:00:00'
+AND TIMESTAMPDIFF(HOUR,
+received_date,
+end_time) >= 0
+AND received_date BETWEEN '{{ $json.body.recieved_date_from }}' AND '{{ $json.body.recieved_date_to }} 23:59:59'
+AND status_name IN ('Completed', 'Not Completed', 'Additional information needed – Pending')
+AND process_id NOT IN (
+    2014,
+-- Growpro New Business Rating Large
+    2012,
+-- Growpro New Business Rating Medium
+    1062,
+-- Growpro New Business Rating Small
+    2002,
+-- Program New Business Rating Large
+    866,
+-- Program New Business Rating Medium
+    2000,
+-- Program New Business Rating Small
+    2601,
+-- WC New Business Rating
+    16676,
+-- Stewardship Reports
+    17240,
+-- AmTrust New Business Rating_Large
+    17238,
+-- AmTrust New Business Rating_Medium
+    17236,
+-- AmTrust New Business Rating_Small
+    17201,
+-- Billing contact update
+    868,
+-- Other Activity
+    3625
+-- OTT-Miscellaneous
 );
   ;
