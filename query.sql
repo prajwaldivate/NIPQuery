@@ -61,7 +61,7 @@ JOIN processes p
 WHERE
     ts.project_id = 29
     AND ts.record_type = 1
-    AND ts.received_date BETWEEN '$1' AND '$2 23:59:59'
+    AND ts.received_date BETWEEN $1 AND '$2 23:59:59'
     AND ts.received_date IS NOT NULL
     AND ts.end_timestamp IS NOT NULL
     AND s.id IN (5,6,10)
