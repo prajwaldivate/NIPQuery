@@ -26,7 +26,6 @@ WHERE
     AND `ts`.`record_type` = 1
     AND `ts`.`received_date` IS NOT NULL
     AND `ts`.`end_timestamp` IS NOT NULL
-    AND `ts`.`received_date` BETWEEN '{{ $json.body.recieved_date_from }}' AND '{{ $json.body.recieved_date_to }} 23:59:59'
     AND `ts`.`end_timestamp` <> '0000-00-00 00:00:00'
     AND `ts`.`received_date` <> '0000-00-00 00:00:00'
     AND `s`.`id` IN (5,6,10)
